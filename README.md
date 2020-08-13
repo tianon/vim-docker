@@ -5,3 +5,5 @@ This was previously a mirror of [github.com/docker/docker/contrib/syntax/vim](ht
 The [`docker` branch](https://github.com/tianon/vim-docker/commits/docker) contains the old Docker-based commit history.
 
 The [`vim` branch](https://github.com/tianon/vim-docker/tree/vim) contains the new Vim-based commit history (and is now the useful one to include/use via vim-pack, etc).
+
+The [`tianon` branch](https://github.com/tianon/vim-docker/tree/tianon) contains my personal fork of the `vim` branch with some minor changes (which I'd normally try to contribute back upstream, but [...](https://twitter.com/tianon/status/1258463662357876736)).
