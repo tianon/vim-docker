@@ -17,7 +17,7 @@ unlet b:current_syntax
 
 syntax case ignore
 syntax match dockerfileLinePrefix /\v^\s*(ONBUILD\s+)?\ze\S/ contains=dockerfileKeyword nextgroup=dockerfileInstruction skipwhite
-syntax region dockerfileFrom matchgroup=dockerfileKeyword start=/\v^\s*(FROM)\ze(\s|$)/ skip=/\v\\\_./ end=/\v((^|\s)AS(\s|$)|$)/ contains=dockerfileOption
+syntax region dockerfileFrom matchgroup=dockerfileKeyword start=/\v^\s*(FROM)\ze(\s|$)/ skip=/\v\\\_.|^\s*#.+$/ end=/\v((^|\s)AS(\s|$)|$)/ contains=dockerfileOption
 
 syntax keyword dockerfileKeyword contained ADD ARG CMD COPY ENTRYPOINT ENV EXPOSE HEALTHCHECK LABEL MAINTAINER ONBUILD RUN SHELL STOPSIGNAL USER VOLUME WORKDIR
 syntax match dockerfileOption contained /\v(^|\s)\zs--\S+/
@@ -29,10 +29,10 @@ syntax match dockerfileInstruction contained /\v<(CMD|ENTRYPOINT|RUN)>/         
 syntax match dockerfileInstruction contained /\v<(CMD|ENTRYPOINT|RUN)>\ze\s+\[/ contains=dockerfileKeyword skipwhite nextgroup=dockerfileJSON
 syntax match dockerfileInstruction contained /\v<(SHELL|VOLUME)>/               contains=dockerfileKeyword skipwhite nextgroup=dockerfileJSON
 
-syntax region dockerfileString contained start=/\v"/ skip=/\v\\./ end=/\v"/
-syntax region dockerfileJSON   contained keepend start=/\v\[/ skip=/\v\\\_./ end=/\v$/ contains=@JSON
-syntax region dockerfileShell  contained keepend start=/\v/ skip=/\v\\\_./ end=/\v$/ contains=@Shell
-syntax region dockerfileValue  contained keepend start=/\v/ skip=/\v\\\_./ end=/\v$/ contains=dockerfileString
+syntax region dockerfileString contained start=/\v"/ skip=/\v\\.|^\s*#.+$/ end=/\v"/
+syntax region dockerfileJSON   contained keepend start=/\v\[/ skip=/\v\\\_.|^\s*#.+$/ end=/\v$/ contains=@JSON
+syntax region dockerfileShell  contained keepend start=/\v/ skip=/\v\\\_.|^\s*#.+$/ end=/\v$/ contains=@Shell
+syntax region dockerfileValue  contained keepend start=/\v/ skip=/\v\\\_.|^\s*#.+$/ end=/\v$/ contains=dockerfileString,dockerfileComment
 
 syntax region dockerfileComment start=/\v^\s*#/ end=/\v$/
 set commentstring=#\ %s
