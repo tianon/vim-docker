@@ -24,6 +24,9 @@ node {
 			])
 		}
 
+		// "Captain: You know what you doing."
+		env.FILTER_BRANCH_SQUELCH_WARNING = '1'
+
 		stage('Filter Docker') {
 			sh '''
 				git checkout refs/remotes/docker/master
