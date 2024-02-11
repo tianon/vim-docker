@@ -15,6 +15,11 @@ node {
 						url: 'https://github.com/docker/docker.git',
 					],
 					[
+						name: 'neovim',
+						refspec: '+refs/heads/master:refs/remotes/neovim/master',
+						url: 'https://github.com/neovim/neovim.git',
+					],
+					[
 						name: 'vim',
 						refspec: '+refs/heads/master:refs/remotes/vim/master',
 						url: 'https://github.com/vim/vim.git',
@@ -37,6 +42,27 @@ node {
 		stage('Push Docker') {
 			sh '''
 				git push --force git@github.com:tianon/vim-docker.git HEAD:refs/heads/docker
+			'''
+		}
+
+		stage('Filter Neovim') {
+			sh '''
+				git checkout refs/remotes/neovim/master
+				git filter-branch --force \
+					--subdirectory-filter runtime
+				git filter-branch --force \
+					--prune-empty \
+					--index-filter '
+						git rm --cached -r --quiet --ignore-unmatch . &&
+						git reset -q $GIT_COMMIT -- \
+							ftplugin/dockerfile.vim \
+							syntax/dockerfile.vim
+					'
+			'''
+		}
+		stage('Push Neovim') {
+			sh '''
+				git push --force git@github.com:tianon/vim-docker.git HEAD:refs/heads/neovim
 			'''
 		}
 
