@@ -32,11 +32,9 @@ node {
 			'''
 		}
 		stage('Push Docker') {
-			sshagent(['ssh-git']) {
-				sh '''
-					git push --force git@github.com:tianon/vim-docker.git HEAD:refs/heads/docker
-				'''
-			}
+			sh '''
+				git push --force git@github.com:tianon/vim-docker.git HEAD:refs/heads/docker
+			'''
 		}
 
 		stage('Filter Vim') {
@@ -55,11 +53,9 @@ node {
 			'''
 		}
 		stage('Push Vim') {
-			sshagent(['ssh-git']) {
-				sh '''
-					git push --force git@github.com:tianon/vim-docker.git HEAD:refs/heads/vim
-				'''
-			}
+			sh '''
+				git push --force git@github.com:tianon/vim-docker.git HEAD:refs/heads/vim
+			'''
 		}
 	}
 }
