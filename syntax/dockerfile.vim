@@ -34,7 +34,10 @@ syntax region dockerfileJSON   contained keepend start=/\v\[/ skip=/\v\\\_.|^\s*
 syntax region dockerfileShell  contained keepend start=/\v/ skip=/\v\\\_.|^\s*#.+$/ end=/\v$/ contains=@Shell
 syntax region dockerfileValue  contained keepend start=/\v/ skip=/\v\\\_.|^\s*#.+$/ end=/\v$/ contains=dockerfileString,dockerfileComment
 
-syntax region dockerfileComment start=/\v^\s*#/ end=/\v$/ contains=@Spell
+" why on earth is this a per-syntax keyword definition??
+syntax keyword dockerfileTodo TODO FIXME XXX BUG contained
+
+syntax region dockerfileComment start=/\v^\s*#/ end=/\v$/ contains=@Spell,dockerfileTodo
 set commentstring=#\ %s
 
 hi def link dockerfileString String
