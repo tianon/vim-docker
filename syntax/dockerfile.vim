@@ -36,6 +36,7 @@ syntax region dockerfileValue  contained keepend start=/\v/ skip=/\v\\\_.|^\s*#.
 
 " why on earth is this a per-syntax keyword definition??
 syntax keyword dockerfileTodo TODO FIXME XXX BUG contained
+hi def link dockerfileTodo Todo
 
 syntax region dockerfileComment start=/\v^\s*#/ end=/\v$/ contains=@Spell,dockerfileTodo
 set commentstring=#\ %s
