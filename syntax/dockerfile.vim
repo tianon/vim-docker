@@ -46,3 +46,5 @@ hi def link dockerfileComment Comment
 hi def link dockerfileOption Special
 
 let b:current_syntax = "dockerfile"
+
+" vim:set ft=vim:
