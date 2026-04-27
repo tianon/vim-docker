@@ -1,6 +1,7 @@
 " dockerfile.vim - Syntax highlighting for Dockerfiles
 " Maintainer:   Honza Pokorny <https://honza.ca>
 " Last Change:  2024 Dec 20
+"               2026 Mar 26 by Vim Project: dockerfileShell comments (#19829)
 " License:      BSD
 
 " https://docs.docker.com/engine/reference/builder/
